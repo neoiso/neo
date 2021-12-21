@@ -35,7 +35,7 @@ public class HomeController {
 		
 		return "home";
 		
-		//return "test";
+		//return "test2222";
 	}
 	
 }
