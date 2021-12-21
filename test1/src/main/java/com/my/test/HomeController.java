@@ -35,11 +35,9 @@ public class HomeController {
 		
 		return "home";
 		
-<<<<<<< main
+
 		//return "test3333";
-=======
-		//return "test";
->>>>>>> 4c63538 test5-211221
+
 	}
 	
 }
