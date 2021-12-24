@@ -58,7 +58,13 @@
 	</dependency>
 
 	
-		
+	<!-- list객체를 그냥 반환해도 json형태로 반환되게 해주는 라이브러리 -->
+	<dependency>
+		<groupId>com.fasterxml.jackson.core</groupId>
+		<artifactId>jackson-databind</artifactId>
+		<version>2.11.2</version>
+	</dependency>
+	
 		
   </dependencies>
   

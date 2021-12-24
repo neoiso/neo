@@ -49,7 +49,24 @@
 
 	<!-- 정적파일 처리 이거 없으면 못읽어옴 -->
 	<mvc:resources location="/static/" mapping="/**" /> <!-- 정적파일은 statc 폴더에 위치 설정함 -->	
-	<mvc:annotation-driven /> <!-- 컨트롤러의 매핑을 위해 필요함 -->
+	
+	<!-- URL과 관련된 항목 컨트롤러의 매핑을 위해 필요함 -->
+	<mvc:annotation-driven>
+	
+		<mvc:message-converters> <!-- 문자열 반환될때 가로채서 문자열 변환시켜줌  -->
+		
+			<!-- #ResponseBody로 String 처리할때 한글처리-->
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>text/html;charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+			
+		</mvc:message-converters>
+		
+	</mvc:annotation-driven> 
 
 
 	

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 //import org.springframework.web.servlet.mvc.Controller; //어노테이션이라 필요없음 자동정리 안됨
 
 @Controller
@@ -18,12 +19,19 @@ public class HomeController {
 //		return "root.index";
 //	}
 	
+	//뷰 없이 출력하는 방법
+//	@RequestMapping("index")
+//	public void index(HttpServletResponse response) throws IOException {
+//		PrintWriter out = response.getWriter();
+//		out.println("Hello Index");
+//	}
+	
 	@RequestMapping("index")
-	public void index(HttpServletResponse response) throws IOException {
-		PrintWriter out = response.getWriter();
-		out.println("Hello Index");
-		//return "root.index";
+	@ResponseBody  //뷰없이 출력하는 방법2
+	public String index() {
+		return "Hello Index2";
 	}
+	
 	
 //	@Override
 //	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
