@@ -4,23 +4,24 @@
 
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
       					http://www.springframework.org/schema/beans/spring-beans.xsd
        					http://www.springframework.org/schema/mvc 
-       					http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+       					http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       					http://www.springframework.org/schema/context   
+       					http://www.springframework.org/schema/context/spring-context.xsd">
        					
 
+	<!--어노테이션 설정  위에 context항목도 추가 a1111 -->
+	<!-- <context:annotation-config /> -->
+    
+    <!--  JDBCNoticeService.java 안에 component를 사용하기위한 스캔범위를 정해준다.얘가 자동으로어노테이션도 찾아보니 위에 어노테이션
+    컨피그는 필요없다-->
+	<context:component-scan base-package="com.newlecture.web.controller" />
+	<context:component-scan base-package="com.newlecture.web.service" />
 	
-	<!-- id가 url이되고 이 아이디로 뒤의 class를 꺼내게 됨, 이때 클래스는 패키지명까지 써야함 -->
-	<bean id="/index" class="com.newlecture.web.controller.IndexController" />
-	<bean id="/notice/list"	class="com.newlecture.web.controller.notice.ListController">
-		<property name="noticeService" ref="noticeService" />
-	</bean>
-		
-	<bean id="/notice/detail" class="com.newlecture.web.controller.notice.DetailController" />
-	
-
 	<!-- tiles의 view resolver -->
 	<bean
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
@@ -48,7 +49,7 @@
 
 	<!-- 정적파일 처리 이거 없으면 못읽어옴 -->
 	<mvc:resources location="/static/" mapping="/**" /> <!-- 정적파일은 statc 폴더에 위치 설정함 -->	
-
+	<mvc:annotation-driven /> <!-- 컨트롤러의 매핑을 위해 필요함 -->
 
 
 	
@@ -61,10 +62,10 @@
 	</bean>
 	
 	
-	
-	<bean id="noticeService" class="com.newlecture.web.service.jdbc.JDBCNoticeService" >	
+	<!-- 여기도 바인디일 어노테이션 처리하면 된다. 다만 소스코드를 수정할 수 없을경우는 이렇게 xml방식으로 사용해야 한다. -->
+	<!-- <bean id="noticeService" class="com.newlecture.web.service.jdbc.JDBCNoticeService" >	
 		<property name="dataSource" ref="dataSource" />
-	</bean>
+	</bean> -->
 	
 	
 	
