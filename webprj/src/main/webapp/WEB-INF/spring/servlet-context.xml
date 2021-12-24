@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- dispatcher-servlet.xml 에서 3개로 위치 옮겨서 분리함 - 유지관리의 편의성 -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+      					http://www.springframework.org/schema/beans/spring-beans.xsd
+       					http://www.springframework.org/schema/mvc 
+       					http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+       					
+
+	
+	<!-- id가 url이되고 이 아이디로 뒤의 class를 꺼내게 됨, 이때 클래스는 패키지명까지 써야함 -->
+	<bean id="/index" class="com.newlecture.web.controller.IndexController" />
+	<bean id="/notice/list"	class="com.newlecture.web.controller.notice.ListController">
+		<property name="noticeService" ref="noticeService" />
+	</bean>
+		
+	<bean id="/notice/detail" class="com.newlecture.web.controller.notice.DetailController" />
+	
+
+	<!-- tiles의 view resolver -->
+	<bean
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.tiles3.TilesView" />
+		<property name="order" value="1" />  <!-- 리솔버가 두종류라 tiles를 우선순위 줌 -->
+	</bean>
+
+	<bean
+		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<property name="definitions" value="/WEB-INF/tiles.xml" />
+	</bean>
+	<!-- tiles의 view resolver -->
+
+
+	<!-- view resolver -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/view/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	<!-- 얘는 리솔버 순위가 뒤로 감 타일즈가 우선으로 view resolver가 됨 -->
+
+
+
+	<!-- 정적파일 처리 이거 없으면 못읽어옴 -->
+	<mvc:resources location="/static/" mapping="/**" /> <!-- 정적파일은 statc 폴더에 위치 설정함 -->	
+
+
+
+	
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="org.mariadb.jdbc.Driver" />
+		<property name="url" value="jdbc:mariadb://localhost:3306/newlec?characterEncoding=UTF-8&amp;serverTimezone=UTC" />
+		<property name="username" value="root" />
+		<property name="password" value="1234" />
+		
+	</bean>
+	
+	
+	
+	<bean id="noticeService" class="com.newlecture.web.service.jdbc.JDBCNoticeService" >	
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	
+	
+	
+</beans>
