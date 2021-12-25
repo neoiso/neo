@@ -48,7 +48,7 @@
 
 
 	<!-- 정적파일 처리 이거 없으면 못읽어옴 -->
-	<mvc:resources location="/static/" mapping="/**" /> <!-- 정적파일은 statc 폴더에 위치 설정함 -->	
+	<mvc:resources location="/static/" mapping="/**" /> <!-- 정적파일은 static 폴더에 위치 설정함 -->	
 	
 	<!-- URL과 관련된 항목 컨트롤러의 매핑을 위해 필요함 -->
 	<mvc:annotation-driven>

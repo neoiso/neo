@@ -12,13 +12,13 @@
 
 
 	<!-- id가 url이되고 이 아이디로 뒤의 class를 꺼내게 됨, 이때 클래스는 패키지명까지 써야함 -->
-	<bean id="/index" class="com.newlecture.web.controller.IndexController" />
+	<!--컨트롤러 바뀌어서 임시로 주석처리<bean id="/index" class="com.newlecture.web.controller.IndexController" />-->
 	
 	<!--<bean id="/notice/list"	class="com.newlecture.web.controller.notice.ListController">
 		<property name="noticeService" ref="noticeService" />
 	</bean>-->
 		
-	<bean id="/notice/detail" class="com.newlecture.web.controller.notice.DetailController" />
+	<!--컨트롤러 바뀌어서 임시로 주석처리<bean id="/notice/detail" class="com.newlecture.web.controller.notice.DetailController" />-->
 
 
 	<!-- tiles의 view resolver -->

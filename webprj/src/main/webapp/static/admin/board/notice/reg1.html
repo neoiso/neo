@@ -146,7 +146,8 @@
                     </ul>
                 </div>
 
-                <form method="post" enctype="multipart/form-data">
+                <!-- <form action="reg" method="post" enctype="multipart/form-data"> -->
+                <form action="reg" method="post">
                     <div class="margin-top first">
                         <h3 class="hidden">공지사항 입력</h3>
                         <table class="table">
@@ -155,6 +156,29 @@
                                     <th>제목</th>
                                     <td class="text-align-left text-indent text-strong text-orange" colspan="3">
                                         <input type="text" name="title" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>카테고리</th>
+                                    <td class="text-align-left text-indent text-strong text-orange" colspan="3">
+                                        <select name="category">
+                                        	<option value="1">카테고리1</option>
+                                        	<option value="2">카테고리2</option>
+                                        	<option value="3">카테고리3</option>
+                                        	<option value="4">카테고리4</option>
+                                        	
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>좋아하는 음식</th>
+                                    <td class="text-align-left text-indent text-strong text-orange" colspan="3">
+                                        <input type="checkbox" value="1" name="foods" id="ch1"><label for="ch1">자장면</label>
+                                        <input type="checkbox" value="2" name="foods" id="ch2"><label for="ch2">짬뽕</label>
+                                        <input type="checkbox" value="3" name="foods" id="ch3"><label for="ch3">볶음밥</label>
+                                        <input type="checkbox" value="4" name="foods" id="ch4"><label for="ch4">탕수육</label>
+                                        	
+                                        </select>
                                     </td>
                                 </tr>
                                 <tr>
