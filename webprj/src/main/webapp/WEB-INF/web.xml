@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://JAVA.sun.com/xml/ns/javaee" xmlns:web="http://JAVA.sun.com/xml/ns/javaee" 
+	xmlns:jsp="http://JAVA.sun.com/xml/ns/javaee/jsp" 
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  
+
+  
+  
+
+    <!-- 리스너를 사용하여 나머지 2개 등록하기 위해 사용한다. -->
+  <listener>
+  	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  <context-param>
+  	<param-name>contextConfigLocation</param-name>
+  	<param-value>/WEB-INF/spring/service-context.xml</param-value>
+  	<param-value>/WEB-INF/spring/security-context.xml</param-value>
+  </context-param>
+  
+  
+  
+  <servlet>
+  	<servlet-name>dispatcher</servlet-name>
+  	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>   	
+  	
+  	
+  	<!--  dispatcher-servlet.xml에서 한번에처리하면 필요없지만 위치 옮기고 분리하면 해당사항을 설정해야 한다.-->
+  	<init-param>
+  		<param-name>contextConfigLocation</param-name> 
+  		<param-value>/WEB-INF/spring/servlet-context.xml</param-value>  		
+  	</init-param>
+  	
+  	<load-on-startup>1</load-on-startup>  <!-- 톰캣시작시 실행 숫자는 우선순위 -->
+  	<async-supported>true</async-supported>  <!-- 비동기적으로 실행 -->
+  	
+  </servlet>
+  
+  
+  
+  
+  
+  <servlet-mapping>
+  	<servlet-name>dispatcher</servlet-name>
+  	
+  	<!-- <url-pattern>/*</url-pattern>-->
+  	<!-- 모든 URL을 디스패처가 받는다. 즉 요청과 결과주는 두가지 방향에서 다 찾는다. 결과물인 jsp를 돌려주려고 찾을경우 못찾음 -->
+  	
+  	<url-pattern>/</url-pattern> <!-- 모든 URL을 다 디스패처가 처리하지만 못찾으면 리소스를 직접찾아서 보여줌 jsp가 이상없이 나오게 됨 요청과 결과값전달 두가지 방향에서 디스패처가 처리하기때문에 나온 결과-->
+  </servlet-mapping>
+  
+  
+ <!-- <display-name>webpj</display-name> --> 
+ 
+  <!-- 
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list> 
+	--> 
+  
+</web-app>

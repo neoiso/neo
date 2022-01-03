@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+      					http://www.springframework.org/schema/beans/spring-beans.xsd
+       					http://www.springframework.org/schema/mvc 
+       					http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       					http://www.springframework.org/schema/context 
+       					http://www.springframework.org/schema/context/spring-context.xsd">       					
+       					
+    <!-- <context:annotation-config /> -->
+    
+    <!--  JDBCNoticeService.java 안에 component를 사용하기위한 스캔범위를 정해준다.얘가 자동으로어노테이션도 찾아보니 위에 어노테이션
+    컨피그는 필요없다-->
+    <context:component-scan base-package="com.newlecture.web.controller" />
+	<context:component-scan base-package="com.newlecture.web.service" />
+
+	
+	
+	
+</beans>

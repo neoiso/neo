@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- dispatcher-servlet.xml 에서 3개로 위치 옮겨서 분리함 - 유지관리의 편의성 -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+      					http://www.springframework.org/schema/beans/spring-beans.xsd
+       					http://www.springframework.org/schema/mvc 
+       					http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       					http://www.springframework.org/schema/context   
+       					http://www.springframework.org/schema/context/spring-context.xsd">
+       					
+
+	<!--어노테이션 설정  위에 context항목도 추가 a1111 -->
+	<!-- <context:annotation-config /> -->
+    
+    <!--  JDBCNoticeService.java 안에 component를 사용하기위한 스캔범위를 정해준다.얘가 자동으로어노테이션도 찾아보니 위에 어노테이션
+    컨피그는 필요없다-->
+	<context:component-scan base-package="com.newlecture.web.controller" />
+	<context:component-scan base-package="com.newlecture.web.service" />
+	
+	<!-- tiles의 view resolver -->
+	<bean
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.tiles3.TilesView" />
+		<property name="order" value="1" />  <!-- 리솔버가 두종류라 tiles를 우선순위 줌 -->
+	</bean>
+
+	<bean
+		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<property name="definitions" value="/WEB-INF/tiles.xml" />
+	</bean>
+	<!-- tiles의 view resolver -->
+
+
+	<!-- view resolver -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/view/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	<!-- 얘는 리솔버 순위가 뒤로 감 타일즈가 우선으로 view resolver가 됨 -->
+
+
+
+	<!-- 정적파일 처리 이거 없으면 못읽어옴 -->
+	<mvc:resources location="/static/" mapping="/**" /> <!-- 정적파일은 static 폴더에 위치 설정함 -->	
+	
+	<!-- URL과 관련된 항목 컨트롤러의 매핑을 위해 필요함 -->
+	<mvc:annotation-driven>
+	
+		<mvc:message-converters> <!-- 문자열 반환될때 가로채서 문자열 변환시켜줌  -->
+		
+			<!-- #ResponseBody로 String 처리할때 한글처리-->
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>text/html;charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+			
+		</mvc:message-converters>
+		
+	</mvc:annotation-driven> 
+
+
+	
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="org.mariadb.jdbc.Driver" />
+		<property name="url" value="jdbc:mariadb://localhost:3306/newlec?characterEncoding=UTF-8&amp;serverTimezone=UTC" />
+		<property name="username" value="root" />
+		<property name="password" value="1234" />
+		
+	</bean>
+	
+	
+	<!-- 여기도 바인디일 어노테이션 처리하면 된다. 다만 소스코드를 수정할 수 없을경우는 이렇게 xml방식으로 사용해야 한다. -->
+	<!-- <bean id="noticeService" class="com.newlecture.web.service.jdbc.JDBCNoticeService" >	
+		<property name="dataSource" ref="dataSource" />
+	</bean> -->
+	
+	
+	
+	
+</beans>
