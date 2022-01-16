@@ -15,6 +15,7 @@ public class DetailController implements Controller{
 		//mv.addObject("data", "Hello Spring MVC");
 		//mv.setViewName("notice/detail");
 		return mv;
+		//...
 	}
 
 }
